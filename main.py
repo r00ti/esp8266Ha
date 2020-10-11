@@ -3,7 +3,6 @@ import time
 from umqtt.robust import MQTTClient
 import os
 import gc
-import sys
 from machine import Pin, PWM
 import onewire, ds18x20
 import json
@@ -33,7 +32,6 @@ def callback_subscriber(topic, msg):
                 led.duty(0)
 
 def do_connect():
-
     sta_if = network.WLAN(network.STA_IF)
     if not sta_if.isconnected():
         print('connecting to network...')
@@ -63,8 +61,7 @@ def main():
     client.set_callback(callback_subscriber)      
     client.subscribe("relay_cmd")
     client.subscribe("light/set")  
-
-    #client.subscribe(mqtt_feedname_sub_2)  
+ 
     PUBLISH_PERIOD_IN_SEC = 0.5
     PUBLISH_PERIOD_IN_SEC2 = 1
     SUBSCRIBE_CHECK_PERIOD_IN_SEC = 0.5 
